@@ -1,18 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp"%>
-    <!DOCTYPE html>
-    <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-    </head>
+    <div class="container">
+	<h3>상품 목록 페이지</h3>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>상품명</th>
+				<th>상품가격</th>
+				<th>상품수량</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${productList}" var="product">
+				 <tr>
+                        <td><a href="#">${product.name}</a></td>
+                        <td>${product.price}</td>
+                        <td>${product.qty}</td>
+                        
+                    </tr>
+                </c:forEach>
+		</tbody>
+	</table>
+</div>
 
-    <body>
-        상품목록
-    </body>
-
-    </html>
     <%@ include file="../layout/footer.jsp" %>

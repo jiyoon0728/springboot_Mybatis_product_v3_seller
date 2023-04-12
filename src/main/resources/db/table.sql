@@ -3,5 +3,5 @@ create table product(
     name varchar not null unique,
     price int not null,
     qty int not null, 
-    createdAt timestamp
+    createdAt timestamp not null
 );

@@ -68,4 +68,14 @@ public class ProductController {
         }
     }
 
+    @PostMapping("/product/{id}/delete")
+    public String delete(@PathVariable int id) {
+        int result = productRepository.delete(id);
+        if (result == 1) {
+            return "redirect:/";
+        } else {
+            return "redirect:/product/" + id;
+        }
+    }
+
 }

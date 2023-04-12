@@ -29,7 +29,7 @@ public class ProductController {
         if (result == 1) {
             return "redirect:/product";
         } else {
-            return "redirect:product/addForm";
+            return "redirect:/product/addForm";
         }
     }
 
@@ -47,9 +47,25 @@ public class ProductController {
         return "product/list";
     }
 
-    @GetMapping("product/update")
-    public String update() {
+    @GetMapping("/product/{id}/updateForm")
+    public String updateForm(@PathVariable Integer id, Model model) {
+        Product product = productRepository.findById(id);
+        model.addAttribute("product", product);
         return "product/updateForm";
+    }
+
+    @PostMapping("/product/{id}/update")
+    public String update(
+            @PathVariable Integer id,
+            String name,
+            Integer price,
+            Integer qty) {
+        int result = productRepository.update(id, name, price, qty);
+        if (result == 1) {
+            return "redirect:/product/" + id;
+        } else {
+            return "redirect:/product/" + id + "/updateForm";
+        }
     }
 
 }

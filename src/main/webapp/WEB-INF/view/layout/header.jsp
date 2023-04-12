@@ -31,7 +31,7 @@
 			</button>
 			<div class="collapse navbar-collapse" id="collapsibleNavbar">
 				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" href="/addForm">상품등록</a></li>
+					<li class="nav-item"><a class="nav-link" href="/product/addForm">상품등록</a></li>
 				</ul>
 			</div>
 		</div>

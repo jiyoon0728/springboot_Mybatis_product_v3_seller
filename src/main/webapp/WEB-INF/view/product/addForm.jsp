@@ -25,12 +25,32 @@
             </tbody>
         </table>
         <div align="center">
-            <button id="btnProductSameCheck" type="submit"
-                class="btn btn-warning">상품명 중복 확인</button>
+            <button id="btnProductSameCheck" type="button"
+                class="btn btn-warning" onclick="productSameCheck()">상품명 중복 확인</button>
             <button id="btnInsert" type="submit" 
                 class="btn btn-primary">상품등록완료</button>
         </div>
     </form>
 </div>
 
+<script>
+         
+         //상품명 중복 확인
+    function productSameCheck() {
+        let productname = $("#name").val();
+        $.ajax({
+            type: "get",
+            url: "/product/productnameSameCheck?productname=" + productname
+        }).done((res) => {
+            console.log(res);
+            if (res.data === true) {
+                alert(res.msg);
+            } else {
+                alert(res.msg);
+            }
+        }).fail((err) => {
+        });
+    }
+   
+</script>
 <%@ include file="../layout/footer.jsp"%>

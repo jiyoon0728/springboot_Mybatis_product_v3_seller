@@ -13,7 +13,7 @@
    </select>
 
    <insert id="insert" >
-      insert into product(name, price, qty, createdAt) values(#{name}, #{price}, #{qty}, now())   
+      insert into product(name, price, qty, createdAt) values(#{productName}, #{productPrice}, #{productQty}, now())   
    </insert>
 
    <delete id="delete" >

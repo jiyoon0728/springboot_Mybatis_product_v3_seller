@@ -4,7 +4,7 @@
 
 <div class="container">
     <h3>상품 등록 페이지</h3>
-    <form action="/product/add" method="post">
+    <%-- <form action="/product/add" method="post"> --%>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -34,7 +34,43 @@
 </div>
 
 <script>
-         
+     // 상품등록
+$("#btnInsert").click(() => {
+	insertProduct();
+});
+
+$("#btnProductSameCheck").click(() => {
+	checkProductName();
+});// 리스너
+
+
+
+function insertProduct() {
+
+	let data = {
+		productName: $("#name").val(),
+		productPrice: $("#price").val(),
+		productQty: $("#qty").val()
+	};
+
+	$.ajax({
+		type : "POST",
+        url : "/product/add",
+		dataType : "json",
+		data : JSON.stringify(data), 
+		contentType: "application/json",
+	}).done((res)=> {
+		if(res.code == 1){
+			alert("제품등록에 성공하였습니다.");
+			location.replace("/");
+		} else {
+			alert("제품등록에 실패하였습니다");
+			history.back();
+		}
+	});
+}
+
+
          //상품명 중복 확인
     function productSameCheck() {
         let productname = $("#name").val();

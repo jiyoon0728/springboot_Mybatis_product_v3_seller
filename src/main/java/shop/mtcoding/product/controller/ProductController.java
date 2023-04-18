@@ -8,9 +8,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import shop.mtcoding.product.dto.ResponseDto;
+import shop.mtcoding.product.dto.Product.ProductReqDto.ProductAddReqDto;
 import shop.mtcoding.product.dto.Product.ProductReqDto.SameReqDto;
 import shop.mtcoding.product.model.product.Product;
 import shop.mtcoding.product.model.product.ProductRepository;
@@ -25,16 +27,7 @@ public class ProductController {
     public String addForm() {
         return "product/addForm";
     }
-
-    @PostMapping("/product/add")
-    public String add(String name, Integer price, Integer qty) {
-        int result = productRepository.insert(name, price, qty);
-        if (result == 1) {
-            return "redirect:/product";
-        } else {
-            return "redirect:/product/addForm";
-        }
-    }
+    
 
     @GetMapping("/product/{id}")
     public String detail(@PathVariable Integer id, Model model) {
@@ -81,6 +74,7 @@ public class ProductController {
         }
     }
 
+    //상품 중복 확인
     @GetMapping("/product/productnameSameCheck")
     public @ResponseBody ResponseDto<?> check(String productname, SameReqDto SameReqDto) {
 
@@ -94,6 +88,21 @@ public class ProductController {
         } else {
             return new ResponseDto<>(1, "제품 등록이 가능합니다", true);
 
+        }
+    }
+
+    //상품 등록하기 
+    @PostMapping("/product/add")
+    public @ResponseBody ResponseDto<?> add(@RequestBody ProductAddReqDto productAddReqDto) {
+        System.out.println("디버깅 : " + productAddReqDto.getProductName());
+        System.out.println("디버깅 : " + productAddReqDto.getProductPrice());
+        System.out.println("디버깅 : " + productAddReqDto.getProductQty());
+        int result = productRepository.insert(productAddReqDto);
+        System.out.println("디버깅 : ");
+        if (result == 1) {
+            return new ResponseDto<>(1, "제품등록 성공", null);
+        } else {
+            return new ResponseDto<>(-1, "제품등록 실패", null);
         }
     }
 }

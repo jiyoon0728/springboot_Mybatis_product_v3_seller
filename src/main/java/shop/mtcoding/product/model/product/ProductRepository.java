@@ -5,13 +5,15 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import shop.mtcoding.product.dto.Product.ProductReqDto.ProductAddReqDto;
+
 @Mapper
 public interface ProductRepository {
     public List<Product> findAll();
 
     public Product findById(int id);
 
-    public int insert(@Param("name") String name, @Param("price") int price, @Param("qty") int qty);
+    public int insert(ProductAddReqDto productAddReqDto);
 
     public int delete(@Param("id") int id);
 
@@ -19,4 +21,10 @@ public interface ProductRepository {
             @Param("qty") int qty);
 
     public Product findByName(String productname);
+
+    
+
+    
+
+    
 }

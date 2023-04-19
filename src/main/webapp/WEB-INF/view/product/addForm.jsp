@@ -28,7 +28,7 @@
             <button id="btnProductSameCheck" type="button"
                 class="btn btn-warning" onclick="productSameCheck()">상품명 중복 확인</button>
             <button id="btnInsert" type="submit" 
-                class="btn btn-primary">상품등록완료</button>
+                class="btn btn-primary">상품등록완료!</button>
         </div>
     </form>
 </div>

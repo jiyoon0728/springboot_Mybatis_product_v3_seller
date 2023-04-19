@@ -34,6 +34,9 @@
 </div>
 
 <script>
+let submitCheck = false;
+let productnameSameCheckEvent = true;
+
      // 상품등록
 $("#btnInsert").click(() => {
 	insertProduct();
@@ -44,8 +47,16 @@ $("#btnProductSameCheck").click(() => {
 });// 리스너
 
 
-
 function insertProduct() {
+	if (submitCheck == false) {
+		alert("상품명 중복 확인을 해주세요");
+		return;
+	}
+
+    if(productnameSameCheckEvent != $("#name").val()){
+        alert("상품명 중복 확인을 다시 해주세요")
+        return;
+    }
 
 	let data = {
 		productName: $("#name").val(),
@@ -70,7 +81,6 @@ function insertProduct() {
 	});
 }
 
-
          //상품명 중복 확인
     function productSameCheck() {
         let productname = $("#name").val();
@@ -81,8 +91,11 @@ function insertProduct() {
             console.log(res);
             if (res.data === true) {
                 alert(res.msg);
+                submitCheck = true;
+                productnameSameCheckEvent = $("#name").val();
             } else {
                 alert(res.msg);
+                submitCheck = false;
             }
         }).fail((err) => {
         });
